@@ -7,13 +7,16 @@ import { ChangeOrderDto, CreateOrderDto, OrderPaginationDTO } from './dto';
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
-  @MessagePattern('createOrder')  
+  @MessagePattern({ cmd:'createOrder'})  
   create(@Payload() createOrderDto: CreateOrderDto) {
     return this.ordersService.create(createOrderDto);
   }
 
-  @MessagePattern('findAllOrders')
+  
+
+  @MessagePattern({ cmd: 'findAllOrders' })
   findAll(@Payload() OrderPaginationDto: OrderPaginationDTO) {
+    console.log("Voy a buscar las ordenes")
     return this.ordersService.findAll(OrderPaginationDto);
   }
 
